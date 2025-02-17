@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: 0;
     text-decoration: none;
+   
 }
 
 html,body{
@@ -122,4 +123,12 @@ html,body{
     line-height: 19px;
     text-decoration-line: underline;
     color: #5c73db
+}
+
+
+@media (max-width: 768px) {
+  .container form .inputContainer input,
+  .container form .button {
+    width: 100%;
+  }
 }

@@ -25,6 +25,22 @@ export function Cadastro() {
   async function handleSubmit(event) {
     event.preventDefault(); 
 
+  if (!formData.name) {
+    alert("O nome é obrigatório!");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!formData.email || !emailRegex.test(formData.email)) {
+    alert("Por favor, insira um e-mail válido.");
+    return;
+  }
+
+  if (!formData.password || formData.password.length < 6) {
+    alert("A senha deve ter no mínimo 6 caracteres.");
+    return;
+  }
+
     try {
       const response = await axios.post("http://localhost:8080/api/v1/cadastro", {
         username: formData.name, 
