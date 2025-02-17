@@ -17,12 +17,12 @@ export function App() {
     <form>
     <div className="inputContainer">
       <label htmlFor="email">Email</label>
-      <input type="text" name="email" id="email" placeholder="studia@gmail.com" />
+      <input type="email" name="email" id="email" placeholder="studia@gmail.com" required/>
     </div>
 
     <div className="inputContainer">
       <label htmlFor="password">Password</label>
-      <input type="password" name="passaword" id="passaword" placeholder="********" />
+      <input type="password" name="password" id="password" placeholder="********" required/>
     </div>
 
     <a href="">Esqueceu sua senha?</a>
@@ -36,8 +36,6 @@ export function App() {
     </div>
 
     </form>
-
-
 
   </div>
     
