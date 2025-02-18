@@ -1,0 +1,49 @@
+/* Estilos Globais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container para os cards */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Estilo de cada card */
+  .card {
+    background: linear-gradient(135deg, #4ac29a, #dc00b1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  /* Título dentro do card */
+  .card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Descrição dentro do card */
+  .card p {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  /* Efeito ao passar o mouse */
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
