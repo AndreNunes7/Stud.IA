@@ -1,91 +1,48 @@
+
 import "./global.css";
-import arrow from "./assets/arrow.svg";
+import arrow from "./assets/arrow.svg"
 import logo from "./assets/logoHeader.svg"; 
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 export function App() {
-  const navigate = useNavigate();
+  
+  return <div className="container">
+    <header>
+      <img src={logo} alt="" />
+      <span>Bem-Vindo ao Studi.a</span>
+      <span>Realize seu cadastro</span>
+    </header>
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setLoginData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
-
-  async function handleLogin(event) {
-    event.preventDefault();
-
-    try {
-      const response = await axios.post("http://localhost:8080/login", {
-        email: loginData.email,
-        password: loginData.password,
-      });
-
-      if (response.status === 200) {
-        alert("Login realizado com sucesso!");
-        console.log("Usuário logado:", response.data);
-        
-        navigate("/Home"); 
-      }
-    } catch (error) {
-      console.error("Erro ao fazer login:", error.response?.data || error);
-      alert("Erro ao fazer login. Verifique suas credenciais.");
-    }
-  }
-
-  return (
-    <div className="container">
-      <header>
-        <img src={logo} alt="Logo" />
-        <span>Bem-Vindo ao Studi.a</span>
-        <span>Faça login na sua conta</span>
-      </header>
-
-      <form onSubmit={handleLogin}>
-        <div className="inputContainer">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder="studia@gmail.com"
-            value={loginData.email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="inputContainer">
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="********"
-            value={loginData.password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <a href="#">Esqueceu sua senha?</a>
-
-        <button className="button" type="submit">
-          Entrar <img src={arrow} alt="Seta" />
-        </button>
-
-        <div className="footer">
-          <p>Ainda não tem uma conta?</p>
-          <Link to="/cadastro">Criar uma conta</Link>
-        </div>
-      </form>
+    <form>
+    <div className="inputContainer">
+      <label htmlFor="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="studia@gmail.com" required/>
     </div>
-  );
+
+    <div className="inputContainer">
+      <label htmlFor="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="********" required/>
+    </div>
+
+    <a href="">Esqueceu sua senha?</a>
+
+    <button className="button">Entrar <img src={arrow} alt="" /></button>
+    
+
+    <div className="footer">
+    <p>Ainda não tem uma conta?</p>
+    <Link to="cadastro">Criar uma conta</Link>
+    <Link to="/swiper">Ir para o Swiper</Link>
+
+
+    </div>
+
+    </form>
+
+  </div>
+    
+  
 }
+
+

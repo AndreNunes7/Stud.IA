@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./global.css";
 import arrow from "./assets/arrow.svg";
+import { useNavigate } from "react-router-dom";
+
+
 
 export function Cadastro() {
- 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,6 +27,22 @@ export function Cadastro() {
   async function handleSubmit(event) {
     event.preventDefault(); 
 
+  if (!formData.name) {
+    alert("O nome é obrigatório!");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!formData.email || !emailRegex.test(formData.email)) {
+    alert("Por favor, insira um e-mail válido.");
+    return;
+  }
+
+  if (!formData.password || formData.password.length < 6) {
+    alert("A senha deve ter no mínimo 6 caracteres.");
+    return;
+  }
+
     try {
       const response = await axios.post("http://localhost:8080/api/v1/cadastro", {
         username: formData.name, 
@@ -38,6 +56,8 @@ export function Cadastro() {
 
       console.log("Usuário cadastrado com sucesso:", response.data);
       response.status === 200 && alert("Usuário cadastrado com sucesso!");
+      navigate("/login")
+      
     } catch (error) {
       console.error("Erro ao cadastrar usuário:", error);
     }
@@ -76,4 +96,4 @@ export function Cadastro() {
       </form>
     </div>
   );
-}
+};

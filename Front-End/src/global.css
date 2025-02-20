@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: 0;
     text-decoration: none;
+   
 }
 
 html,body{
@@ -101,6 +102,7 @@ html,body{
 .container form .button{
     cursor: pointer;
     opacity: 0.8;
+   
 }
 .container form .footer{
     display: flex;
@@ -123,3 +125,12 @@ html,body{
     text-decoration-line: underline;
     color: #5c73db
 }
+
+
+@media (max-width: 768px) {
+  .container form .inputContainer input,
+  .container form .button {
+    width: 100%;
+  }
+}
+
