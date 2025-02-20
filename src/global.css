@@ -1,0 +1,136 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: 0;
+    text-decoration: none;
+   
+}
+
+html,body{
+    font-family: "Inter", serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.container header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    
+}
+
+.container header span {
+    padding-top: 8px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.container form .inputContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.container form .inputContainer label{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}
+
+.container form .inputContainer input{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+    width: 520px;
+    height: 49px;
+    border: 1px solid #5c73db;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.container form a{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    padding-top: 15px;
+    padding-bottom: 16px;
+    color: #5c73db;
+
+}
+
+.container form .button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    width: 520px;
+    height: 48px;
+
+    background: #4763e4;
+    border-radius: 12px;
+
+    font-size: 18px;
+    line-height: 18px;
+
+    display: flex;
+    gap: 15px;
+    color: #fff;
+}
+
+.container form .button{
+    cursor: pointer;
+    opacity: 0.8;
+   
+}
+.container form .footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.container form .footer p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000;
+}
+.container form .footer a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-decoration-line: underline;
+    color: #5c73db
+}
+
+
+@media (max-width: 768px) {
+  .container form .inputContainer input,
+  .container form .button {
+    width: 100%;
+  }
+}
+
