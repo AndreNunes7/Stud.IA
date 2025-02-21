@@ -9,12 +9,19 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 
 export function SwiperPage() {
   const [trilhaEscolhida, setTrilhaEscolhida] = useState(null);
+  const [senioridadeEscolhida, setSenioridadeEscolhida] = useState(null);
 
   const trilhas = ["Frontend", "Backend", "DevOps", "Infraestrutura", "Redes", "Data Science" , "Inteligencia artificial"];
+  const senioridade = ["estudante", "junior", "sênior", "pleno"];
 
   const handleTrilhaClick = (trilha) => {
     setTrilhaEscolhida(trilha);
     console.log("Trilha escolhida:", trilha);
+  };
+
+  const handleSenioridadeClick = (senioridade) => {
+    setSenioridadeEscolhida(senioridade);
+    console.log("Senioridade escolhida:", senioridade);
   };
 
   return (
@@ -76,18 +83,19 @@ export function SwiperPage() {
         </SwiperSlide>
 
         {/* Slide 4 - Nível de experiência */}
-        <SwiperSlide>
+       {/* Slide 4 - Nível de experiência (senioridade) */}
+       <SwiperSlide>
           <div className="slide-content">
-            <h2>Qual trilha de conhecimento você quer seguir? 🚀</h2>
+            <h2>Qual seu nível de senioridade? 🚀</h2>
             <p>Escolha uma das opções abaixo:</p>
             <div className="trilhas-container">
-              {trilhas.map((trilha) => (
+              {senioridade.map((nivel) => (
                 <button
-                  key={trilha}
-                  className={`trilha-card ${trilhaEscolhida === trilha ? "selected" : ""}`}
-                  onClick={() => handleTrilhaClick(trilha)}
+                  key={nivel}
+                  className={`trilha-card ${senioridadeEscolhida === nivel ? "selected" : ""}`}
+                  onClick={() => handleSenioridadeClick(nivel)} // Mudou para o handle de senioridade
                 >
-                  {trilha}
+                  {nivel}
                 </button>
               ))}
             </div>
