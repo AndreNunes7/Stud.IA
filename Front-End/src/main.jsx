@@ -4,6 +4,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 import {App} from './login.jsx'
 import {Cadastro} from "./cadastro.jsx"
 import { SwiperPage } from "./SwiperPage";
+import {TelaInicial} from "./telaInicial.jsx"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -12,6 +13,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/Cadastro" element={<Cadastro />} />
         <Route path="/swiper" element={<SwiperPage />} />
+        <Route path='/telaInicial' element={<TelaInicial />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

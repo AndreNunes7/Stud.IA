@@ -6,12 +6,18 @@ import "swiper/css/pagination";
 import "./cards.css";
 import "./swiper.css";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 export function SwiperPage() {
   const [trilhaEscolhida, setTrilhaEscolhida] = useState(null);
   const [senioridadeEscolhida, setSenioridadeEscolhida] = useState(null);
   const [DificuldadeEscolhida, setDificuldadeEscolhida] = useState(null);
   const [diasEscolhidos, setDiasEscolhidos] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const navigate = useNavigate();
+
 
   const trilhas = [
     "Frontend",
@@ -55,10 +61,42 @@ export function SwiperPage() {
     }
   };
 
+ const handleConfirmar = async () => {
+  if (isSubmitted) return;
+
+  const dadosResumo = {
+    selecoes: [
+      trilhaEscolhida,
+      senioridadeEscolhida,
+      DificuldadeEscolhida,
+      ...diasEscolhidos,
+    ],
+  };
+
+  console.log("Dados confirmados:", JSON.stringify(dadosResumo, null, 2));
+
+  try {
+    const response = await axios.post("http://localhost:8080/api/v1/roadmap/kayky", dadosResumo);
+    console.log('Resposta da API:', response.data);
+
+    // Agora você pode navegar para a telaInicial passando os dados da resposta
+    navigate('/telaInicial', { state: { dados: response.data } });
+  } catch (error) {
+    console.error('Erro ao enviar os dados:', error);
+  }
+
+  setIsSubmitted(true);
+};
+    
+  const todosCamposSelecionados = trilhaEscolhida && DificuldadeEscolhida && diasEscolhidos.length > 0;
+
+
+  
+
   return (
     <div className="container">
       <header>
-        <span>Explore os Slides</span>
+        <span></span>
       </header>
 
       <Swiper
@@ -72,11 +110,17 @@ export function SwiperPage() {
       >
         {/* Slide 1 - Começar */}
         <SwiperSlide>
-          <div className="slide-content">
-            <h2>Bora começar 📅</h2>
-            <p></p>
+        <div className="inicio-container">
+          <header className="inicio-header">
+            <h1>Bem-vindo ao Seu Guia de Aprendizado 💻</h1>
+            <p>Descubra sua trilha ideal e comece sua jornada agora!</p>
+            <p>Clique na seta ao lado para continuar!</p>
+          </header>
+          <div className="inicio-content">
+           
           </div>
-        </SwiperSlide>
+        </div>
+      </SwiperSlide>
 
         {/* Slide 2 - Escolha de trilha */}
         <SwiperSlide>
@@ -172,21 +216,27 @@ export function SwiperPage() {
           </div>
         </SwiperSlide>
 
-        {/* Slide 6 - Resumo */}
         <SwiperSlide>
-          <div className="slide-content">
-            <h2>Resumo</h2>
-            <p>
-              <strong>Trilha escolhida:</strong> {trilhaEscolhida} <br />
-              <strong>Senioridade escolhida:</strong> {senioridadeEscolhida}{" "}
-              <br />
-              <strong>Dificuldade escolhida:</strong> {DificuldadeEscolhida}{" "}
-              <br />
-              <strong>Dias escolhidos para estudo:</strong>{" "}
-              {diasEscolhidos.join(", ")}
-            </p>
+        <div className="slide-content resumo-container">
+        <h2>Resumo</h2>
+          <div className="resumo-box color-box">
+            <div className="resumo-item"><i className="icon-trilha" /> <strong>Trilha escolhida:</strong> {trilhaEscolhida}</div>
+            <div className="resumo-item"><i className="icon-senioridade" /> <strong>Senioridade escolhida:</strong> {senioridadeEscolhida}</div>
+            <div className="resumo-item"><i className="icon-dificuldade" /> <strong>Dificuldade escolhida:</strong> {DificuldadeEscolhida}</div>
+            <div className="resumo-item"><i className="icon-dias" /> <strong>Dias escolhidos para estudo:</strong> {diasEscolhidos.join(", ")}</div>
+
           </div>
-        </SwiperSlide>
+
+          {todosCamposSelecionados && (
+              <div className="botao-container">
+                <button className="botao-confirmar" onClick={handleConfirmar}>
+                  {isSubmitted ? "Enviado!" : "Confirmar!"}
+                </button>
+              </div>
+            )}
+
+        </div>
+      </SwiperSlide>
       </Swiper>
     </div>
   );
