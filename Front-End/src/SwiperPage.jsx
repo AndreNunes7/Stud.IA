@@ -76,10 +76,16 @@ export function SwiperPage() {
   console.log("Dados confirmados:", JSON.stringify(dadosResumo, null, 2));
 
   try {
+<<<<<<< HEAD
     const response = await axios.post("http://localhost:8080/api/v1/roadmap/kayky", dadosResumo);
     console.log('Resposta da API:', response.data);
 
     // Agora você pode navegar para a telaInicial passando os dados da resposta
+=======
+    const response = await axios.post("http://localhost:8080/api/v1/roadmap", dadosResumo);
+    console.log('Resposta da API:', response.data);
+
+>>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
     navigate('/telaInicial', { state: { dados: response.data } });
   } catch (error) {
     console.error('Erro ao enviar os dados:', error);
@@ -219,6 +225,10 @@ export function SwiperPage() {
         <SwiperSlide>
         <div className="slide-content resumo-container">
         <h2>Resumo</h2>
+<<<<<<< HEAD
+=======
+          
+>>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
           <div className="resumo-box color-box">
             <div className="resumo-item"><i className="icon-trilha" /> <strong>Trilha escolhida:</strong> {trilhaEscolhida}</div>
             <div className="resumo-item"><i className="icon-senioridade" /> <strong>Senioridade escolhida:</strong> {senioridadeEscolhida}</div>

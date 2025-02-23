@@ -12,9 +12,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/Cadastro" element={<Cadastro />} />
+<<<<<<< HEAD
         <Route path="/swiper" element={<SwiperPage />} />
         <Route path='/telaInicial' element={<TelaInicial />} />
 
+=======
+        <Route path='/telaInicial' element={<TelaInicial />} />
+        <Route path='/login' element={<App/>} />
+        <Route path='/SwiperPage' element={<SwiperPage/>} />
+>>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

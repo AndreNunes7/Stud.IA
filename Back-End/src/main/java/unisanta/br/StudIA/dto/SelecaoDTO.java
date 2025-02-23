@@ -15,6 +15,13 @@ public record SelecaoDTO(
         selecao.setUser(user);
         selecao.setUsuario(user.getUsername());
         selecao.setSelecoes(this.selecoes);
+<<<<<<< HEAD
         return selecao;
     }
 }
+=======
+
+        return selecao;
+    }
+}
+>>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
