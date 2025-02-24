@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import ToggleButton from "../../components/toggleButton";
 
 export function Cadastro() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const storedTheme = localStorage.getItem('isDarkMode') === 'true';
+  const [isDarkMode, setIsDarkMode] = useState(storedTheme);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,20 +21,23 @@ export function Cadastro() {
 
  
   useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add("dark-theme");
-      document.body.classList.remove("light-theme");
-    } else {
-      document.body.classList.add("light-theme");
-      document.body.classList.remove("dark-theme");
-    }
-  }, [isDarkMode]);
-
-
-  const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
-  };
-
+      if (isDarkMode) {
+        document.body.classList.add("dark-theme");
+        document.body.classList.remove("light-theme");
+      } else {
+        document.body.classList.add("light-theme");
+        document.body.classList.remove("dark-theme");
+      }
+  
+      
+      localStorage.setItem('isDarkMode', isDarkMode);
+    }, [isDarkMode]);
+  
+   
+    const toggleTheme = () => {
+      setIsDarkMode(prevMode => !prevMode);
+    };
+  
 
   function handleChange(event) {
     const { name, value } = event.target;

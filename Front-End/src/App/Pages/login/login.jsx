@@ -6,34 +6,35 @@ import React, { useState, useEffect } from 'react';
 import ToggleButton from "../../components/toggleButton";
 
 export function App() {
-  
-  const [isDarkMode, setIsDarkMode] = useState(false);
+                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ const storedTheme = localStorage.getItem('isDarkMode') === 'true';
+ const [isDarkMode, setIsDarkMode] = useState(storedTheme);
 
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
-  });
+  });                       
 
   const navigate = useNavigate();
 
   useEffect(() => {
-   
     if (isDarkMode) {
-      document.body.style.backgroundColor = '#333';
-      document.body.style.color = '#fff';
-      document.querySelector('.container').style.background = 'linear-gradient(145deg, #2b2b2b, #1f1f1f)';
+      document.body.classList.add("dark-theme");
+      document.body.classList.remove("light-theme");
     } else {
-      document.body.style.backgroundColor = '#fff';
-      document.body.style.color = '#000';
-      document.querySelector('.container').style.background = 'linear-gradient(145deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%)';
+      document.body.classList.add("light-theme");
+      document.body.classList.remove("dark-theme");
     }
-  }, [isDarkMode]); 
 
-  
+    
+    localStorage.setItem('isDarkMode', isDarkMode);
+  }, [isDarkMode]);
+
+ 
   const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode); 
+    setIsDarkMode(prevMode => !prevMode);
   };
-
 
 
   function handleChange(event) {
