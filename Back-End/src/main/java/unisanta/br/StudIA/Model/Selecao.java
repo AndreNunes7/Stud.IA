@@ -1,18 +1,11 @@
 package unisanta.br.StudIA.Model;
 
-<<<<<<< HEAD
-=======
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 import java.io.IOException;
 import java.util.List;
 
@@ -27,20 +20,14 @@ public class Selecao {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-<<<<<<< HEAD
-=======
     @JsonBackReference
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
     private Users user;
 
     @Column(name = "usuario", nullable = false)
     private String usuario;
 
     @Column(name = "selecoes", columnDefinition = "TEXT")
-<<<<<<< HEAD
-=======
     @JsonIgnore
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
     private String selecoesJson;
 
     @Transient
@@ -92,12 +79,9 @@ public class Selecao {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 }

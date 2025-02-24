@@ -1,21 +1,14 @@
 package unisanta.br.StudIA.Model;
 
-<<<<<<< HEAD
-=======
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-<<<<<<< HEAD
-import java.util.Date;
-=======
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 
 @Entity
 @Table(name = "user")
@@ -33,11 +26,7 @@ public class Users {
     private String email;
 
     @Column(name = "senha", nullable = false)
-<<<<<<< HEAD
-    private String senha;
-=======
     private String password;
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,8 +38,6 @@ public class Users {
     @Column(name = "update_timestamp")
     private Date updateTimestamp;
 
-<<<<<<< HEAD
-=======
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonProperty("itens")
     @JsonManagedReference
@@ -61,7 +48,6 @@ public class Users {
 
 
 
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
     // Getters e Setters
     public Long getUserId() {
         return userId;
@@ -87,21 +73,12 @@ public class Users {
         this.email = email;
     }
 
-<<<<<<< HEAD
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-=======
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
     }
 
     public Date getCreationTimestamp() {
@@ -119,8 +96,6 @@ public class Users {
     public void setUpdateTimestamp(Date updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
     }
-<<<<<<< HEAD
-=======
 
     public List<Selecao> getSelecoes() {
         return selecoes;
@@ -134,5 +109,4 @@ public class Users {
 
 
 
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 }

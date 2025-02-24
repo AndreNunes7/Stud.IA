@@ -1,0 +1,221 @@
+/* Estilos globais */
+#app {
+  height: 100%;
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+/* Estilos do Swiper */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 10px;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+}
+
+/* Estilos para o slide de início */
+.inicio-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.inicio-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 700;
+}
+
+.inicio-header p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.inicio-content {
+  margin-top: 20px;
+}
+
+.inicio-image {
+  width: 80%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para os botões */
+.trilha-card,
+.dia-card {
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.trilha-card:hover,
+.dia-card:hover {
+  background-color: #ffab00;
+  color: white;
+  border-color: #ff8f00;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.trilha-card.selected,
+.dia-card.selected {
+  background-color: #ff8f00;
+  color: white;
+  border-color: #ff6f00;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para os containers de trilhas e dias */
+.trilhas-container,
+.dias-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+/* Estilos para a tela de resumo */
+.resumo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.resumo-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+}
+
+.resumo-item {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+}
+
+.resumo-item i {
+  font-size: 1.5rem;
+  color: #ff8f00;
+}
+
+/* Estilos para o botão de confirmação */
+.botao-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.botao-confirmar {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.botao-confirmar:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.botao-confirmar:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .inicio-header h1 {
+    font-size: 2rem;
+  }
+
+  .inicio-header p {
+    font-size: 1rem;
+  }
+
+  .trilha-card,
+  .dia-card {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .resumo-item {
+    font-size: 1rem;
+  }
+
+  .botao-confirmar {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trilhas-container,
+  .dias-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .resumo-box {
+    padding: 15px;
+  }
+}

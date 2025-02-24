@@ -2,40 +2,19 @@ package unisanta.br.StudIA.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-<<<<<<< HEAD
-import unisanta.br.StudIA.Model.Selecao;
-import unisanta.br.StudIA.Model.Users;
-import unisanta.br.StudIA.dto.SelecaoDTO;
-=======
 import reactor.core.publisher.Mono;
 import unisanta.br.StudIA.Model.Selecao;
 import unisanta.br.StudIA.Model.Users;
 import unisanta.br.StudIA.dto.SelecaoDTO;
 import unisanta.br.StudIA.service.OpenAIService;
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 import unisanta.br.StudIA.service.SelecaoService;
 import unisanta.br.StudIA.service.UserService;
 
 import java.util.HashMap;
-<<<<<<< HEAD
-import java.util.List;
-=======
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
 import java.util.Map;
 
 
 @RestController
-<<<<<<< HEAD
-@RequestMapping("/api/v1/")
-public class roadmapController {
-
-    private final UserService userService;
-    private final SelecaoService selecaoService;
-
-    public roadmapController(UserService userService, SelecaoService selecaoService) {
-        this.userService = userService;
-        this.selecaoService = selecaoService;
-=======
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/")
 public class roadmapController {
@@ -51,21 +30,21 @@ public class roadmapController {
         this.userService = userService;
         this.selecaoService = selecaoService;
 
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
     }
 
     @PostMapping("/roadmap")
     public ResponseEntity<Map<String, Object>> createRoadmap(@RequestBody SelecaoDTO selecaoDTO) {
-        if (selecaoDTO == null || selecaoDTO.username() == null || selecaoDTO.selecoes() == null) {
+        if (selecaoDTO == null || selecaoDTO.userID() == null || selecaoDTO.selecoes() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("message", "Username e selecoes são obrigatórios"));
+                    .body(Map.of("message", "ID e seleções são obrigatórios"));
         }
 
-        Users user = userService.findByUsername(selecaoDTO.username());
+        Users user = userService.getUserById(selecaoDTO.userID());
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("message", "Usuário não encontrado"));
         }
+
 
         Selecao selecao = selecaoDTO.mapearSelecao(user);
 
@@ -81,10 +60,6 @@ public class roadmapController {
         responseMap.put("Seleções", response);
 
         return ResponseEntity.status(HttpStatus.OK).body(responseMap);
-<<<<<<< HEAD
-    }
-}
-=======
 
         // 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
 
@@ -126,4 +101,3 @@ public class roadmapController {
 
 
 
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)

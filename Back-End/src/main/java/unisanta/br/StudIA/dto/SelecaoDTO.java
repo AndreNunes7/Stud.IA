@@ -6,7 +6,7 @@ import unisanta.br.StudIA.Model.Users;
 import java.util.List;
 
 public record SelecaoDTO(
-        String username,
+        Long userID,
         List<String> selecoes
 ) {
 
@@ -15,13 +15,8 @@ public record SelecaoDTO(
         selecao.setUser(user);
         selecao.setUsuario(user.getUsername());
         selecao.setSelecoes(this.selecoes);
-<<<<<<< HEAD
-        return selecao;
-    }
-}
-=======
+
 
         return selecao;
     }
 }
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)

@@ -3,21 +3,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "./cards.css";
-import "./swiper.css";
+import "../styles/cards.css";
+import "../styles/swiper.css";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 
 export function SwiperPage() {
   const [trilhaEscolhida, setTrilhaEscolhida] = useState(null);
   const [senioridadeEscolhida, setSenioridadeEscolhida] = useState(null);
-  const [DificuldadeEscolhida, setDificuldadeEscolhida] = useState(null);
+  const [dificuldadeEscolhida, setDificuldadeEscolhida] = useState(null);
   const [diasEscolhidos, setDiasEscolhidos] = useState([]);
-  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
-
 
   const trilhas = [
     "Frontend",
@@ -30,14 +27,17 @@ export function SwiperPage() {
   ];
   const senioridade = ["estudante", "junior", "sênior", "pleno"];
   const dificuldades = [
-    "Debugging 🐞",
-    "Algoritmos e Lógica 🔢",
-    "Sincronização de Dados 🔄",
-    "Frameworks Complexos ⚙️",
-    "Testes de Código ✅",
-    "Desempenho de Aplicação 🚀",
+    "Entendimento de Requisitos",
+    "Integração de APIs",
+    "Otimização de Banco de Dados",
+    "Versionamento de Código",
+    "Segurança de Aplicações",
+    "Comunicação em Equipe",
+    "Resolução de Conflitos de Merge",
+    
+    
+    "Refatoração de Código Legado",
   ];
-
   const handleTrilhaClick = (trilha) => {
     setTrilhaEscolhida(trilha);
     console.log("Trilha escolhida:", trilha);
@@ -61,43 +61,46 @@ export function SwiperPage() {
     }
   };
 
- const handleConfirmar = async () => {
-  if (isSubmitted) return;
+  const handleConfirmar = async () => {
+    if (isSubmitted) return;
 
-  const dadosResumo = {
-    selecoes: [
-      trilhaEscolhida,
-      senioridadeEscolhida,
-      DificuldadeEscolhida,
-      ...diasEscolhidos,
-    ],
+    const dadosResumo = {
+      userID: localStorage.getItem("userId"), 
+      selecoes: [
+        trilhaEscolhida,
+        senioridadeEscolhida,
+        dificuldadeEscolhida,
+        ...diasEscolhidos,
+      ].filter(Boolean), 
+    };
+
+    console.log("Dados confirmados:", JSON.stringify(dadosResumo, null, 2));
+
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/roadmap", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dadosResumo),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Resposta da API:", data);
+        alert("Seleções salvas com sucesso!");
+        setIsSubmitted(true);
+      } else {
+        console.error("Erro na requisição:", response.statusText);
+        alert("Erro ao salvar seleções.");
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      alert("Erro ao salvar seleções.");
+    }
   };
 
-  console.log("Dados confirmados:", JSON.stringify(dadosResumo, null, 2));
-
-  try {
-<<<<<<< HEAD
-    const response = await axios.post("http://localhost:8080/api/v1/roadmap/kayky", dadosResumo);
-    console.log('Resposta da API:', response.data);
-
-    // Agora você pode navegar para a telaInicial passando os dados da resposta
-=======
-    const response = await axios.post("http://localhost:8080/api/v1/roadmap", dadosResumo);
-    console.log('Resposta da API:', response.data);
-
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
-    navigate('/telaInicial', { state: { dados: response.data } });
-  } catch (error) {
-    console.error('Erro ao enviar os dados:', error);
-  }
-
-  setIsSubmitted(true);
-};
-    
-  const todosCamposSelecionados = trilhaEscolhida && DificuldadeEscolhida && diasEscolhidos.length > 0;
-
-
-  
+  const todosCamposSelecionados = trilhaEscolhida && dificuldadeEscolhida && diasEscolhidos.length > 0;
 
   return (
     <div className="container">
@@ -116,17 +119,15 @@ export function SwiperPage() {
       >
         {/* Slide 1 - Começar */}
         <SwiperSlide>
-        <div className="inicio-container">
-          <header className="inicio-header">
-            <h1>Bem-vindo ao Seu Guia de Aprendizado 💻</h1>
-            <p>Descubra sua trilha ideal e comece sua jornada agora!</p>
-            <p>Clique na seta ao lado para continuar!</p>
-          </header>
-          <div className="inicio-content">
-           
+          <div className="inicio-container">
+            <header className="inicio-header">
+              <h1>Bem-vindo ao Seu Guia de Aprendizado 💻</h1>
+              <p>Descubra sua trilha ideal e comece sua jornada agora!</p>
+              <p>Clique na seta ao lado para continuar!</p>
+            </header>
+            <div className="inicio-content"></div>
           </div>
-        </div>
-      </SwiperSlide>
+        </SwiperSlide>
 
         {/* Slide 2 - Escolha de trilha */}
         <SwiperSlide>
@@ -190,7 +191,7 @@ export function SwiperPage() {
                 <button
                   key={dificuldade}
                   className={`trilha-card ${
-                    DificuldadeEscolhida === dificuldade ? "selected" : ""
+                    dificuldadeEscolhida === dificuldade ? "selected" : ""
                   }`}
                   onClick={() => handleDificuldadeClick(dificuldade)}
                 >
@@ -222,31 +223,39 @@ export function SwiperPage() {
           </div>
         </SwiperSlide>
 
+        {/* Slide 6 - Resumo */}
         <SwiperSlide>
-        <div className="slide-content resumo-container">
-        <h2>Resumo</h2>
-<<<<<<< HEAD
-=======
-          
->>>>>>> c959c5c (Feat: Integraçao com a API, arrumado bugs no front e melhorias na resposta da requisiçao da api)
-          <div className="resumo-box color-box">
-            <div className="resumo-item"><i className="icon-trilha" /> <strong>Trilha escolhida:</strong> {trilhaEscolhida}</div>
-            <div className="resumo-item"><i className="icon-senioridade" /> <strong>Senioridade escolhida:</strong> {senioridadeEscolhida}</div>
-            <div className="resumo-item"><i className="icon-dificuldade" /> <strong>Dificuldade escolhida:</strong> {DificuldadeEscolhida}</div>
-            <div className="resumo-item"><i className="icon-dias" /> <strong>Dias escolhidos para estudo:</strong> {diasEscolhidos.join(", ")}</div>
+          <div className="slide-content resumo-container">
+            <h2>Resumo</h2>
+            <div className="resumo-box color-box">
+              <div className="resumo-item">
+                <i className="icon-trilha" /> <strong>Trilha escolhida:</strong>{" "}
+                {trilhaEscolhida}
+              </div>
+              <div className="resumo-item">
+                <i className="icon-senioridade" />{" "}
+                <strong>Senioridade escolhida:</strong> {senioridadeEscolhida}
+              </div>
+              <div className="resumo-item">
+                <i className="icon-dificuldade" />{" "}
+                <strong>Dificuldade escolhida:</strong> {dificuldadeEscolhida}
+              </div>
+              <div className="resumo-item">
+                <i className="icon-dias" />{" "}
+                <strong>Dias escolhidos para estudo:</strong>{" "}
+                {diasEscolhidos.join(", ")}
+              </div>
+            </div>
 
-          </div>
-
-          {todosCamposSelecionados && (
+            {todosCamposSelecionados && (
               <div className="botao-container">
                 <button className="botao-confirmar" onClick={handleConfirmar}>
                   {isSubmitted ? "Enviado!" : "Confirmar!"}
                 </button>
               </div>
             )}
-
-        </div>
-      </SwiperSlide>
+          </div>
+        </SwiperSlide>
       </Swiper>
     </div>
   );
