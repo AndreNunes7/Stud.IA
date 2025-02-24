@@ -2,15 +2,39 @@ import "../styles/global.css";
 import arrow from "../../assets/arrow.svg";
 import logo from "../../assets/logoStudIA.png"; 
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import ToggleButton from "../../components/toggleButton";
 
 export function App() {
+  
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+   
+    if (isDarkMode) {
+      document.body.style.backgroundColor = '#333';
+      document.body.style.color = '#fff';
+      document.querySelector('.container').style.background = 'linear-gradient(145deg, #2b2b2b, #1f1f1f)';
+    } else {
+      document.body.style.backgroundColor = '#fff';
+      document.body.style.color = '#000';
+      document.querySelector('.container').style.background = 'linear-gradient(145deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%)';
+    }
+  }, [isDarkMode]); 
+
+  
+  const toggleTheme = () => {
+    setIsDarkMode(prevMode => !prevMode); 
+  };
+
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -55,8 +79,8 @@ export function App() {
 
       if (responseData && responseData.userID) {
         localStorage.setItem("userId", responseData.userID);
-    }
-      
+      }
+
       if (response.status === 200) {
         alert("Usuário autenticado com sucesso!");
         console.log("response: " + JSON.stringify(responseData));
@@ -120,9 +144,9 @@ export function App() {
         <div className="footer">
           <p>Ainda não tem uma conta?</p>
           <Link to="/cadastro">Criar uma conta</Link>
-          {/* <Link to="/SwiperPage">Ir para o Swiper</Link> */}
         </div>
       </form>
+      <ToggleButton isDarkMode={isDarkMode} onToggle={toggleTheme} />
     </div>
   );
 }

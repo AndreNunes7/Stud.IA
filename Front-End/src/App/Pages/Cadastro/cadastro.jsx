@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import logo from "../../assets/logoStudIA.png"; 
+import logo from "../../assets/logoStudIA.png";
 import "../styles/global.css";
-import arrow from "../../assets/arrow.svg"; 
+import arrow from "../../assets/arrow.svg";
 import { useNavigate } from "react-router-dom";
+import ToggleButton from "../../components/toggleButton";
 
 export function Cadastro() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,6 +17,23 @@ export function Cadastro() {
   });
 
   const navigate = useNavigate();
+
+ 
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-theme");
+      document.body.classList.remove("light-theme");
+    } else {
+      document.body.classList.add("light-theme");
+      document.body.classList.remove("dark-theme");
+    }
+  }, [isDarkMode]);
+
+
+  const toggleTheme = () => {
+    setIsDarkMode(prevMode => !prevMode);
+  };
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -24,7 +44,7 @@ export function Cadastro() {
   }
 
   async function handleSubmit(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     if (!formData.name) {
       alert("O nome é obrigatório!");
@@ -44,25 +64,23 @@ export function Cadastro() {
 
     try {
       const response = await fetch("http://localhost:8080/api/v1/auth/cadastrar", {
-        method: "POST",  
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.name, 
+          username: formData.name,
           email: formData.email,
-          senha: formData.senha, 
-        }),  
+          senha: formData.senha,
+        }),
       });
 
       if (response.status === 201) {
         alert("Usuário cadastrado com sucesso!");
         navigate("/login");
-
       } else {
         alert("Erro ao cadastrar usuário.");
       }
-
     } catch (error) {
       console.error("Erro ao cadastrar usuário:", error);
     }
@@ -71,24 +89,45 @@ export function Cadastro() {
   return (
     <div className="container">
       <header>
-         <img src={logo} alt="Logo Stud.Ia" />
+        <img src={logo} alt="Logo Stud.Ia" />
         <span>Crie sua conta no Stud.IA</span>
       </header>
 
       <form onSubmit={handleSubmit}>
         <div className="inputContainer">
           <label htmlFor="name">Nome</label>
-          <input type="text" name="name" id="name" placeholder="Seu nome" onChange={handleChange} value={formData.name} />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Seu nome"
+            onChange={handleChange}
+            value={formData.name}
+          />
         </div>
 
         <div className="inputContainer">
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="studia@gmail.com" onChange={handleChange} value={formData.email} />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="studia@gmail.com"
+            onChange={handleChange}
+            value={formData.email}
+          />
         </div>
 
         <div className="inputContainer">
           <label htmlFor="senha">Senha</label>
-          <input type="password" name="senha" id="senha" placeholder="********" onChange={handleChange} value={formData.senha} />
+          <input
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="********"
+            onChange={handleChange}
+            value={formData.senha}
+          />
         </div>
 
         <button className="button" type="submit">
@@ -100,6 +139,9 @@ export function Cadastro() {
           <Link to="/">Fazer login</Link>
         </div>
       </form>
+
+     
+      <ToggleButton isDarkMode={isDarkMode} onToggle={toggleTheme} />
     </div>
   );
 }
