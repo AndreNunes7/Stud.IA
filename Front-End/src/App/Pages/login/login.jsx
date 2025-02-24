@@ -145,6 +145,7 @@ export function App() {
         <div className="footer">
           <p>Ainda não tem uma conta?</p>
           <Link to="/cadastro">Criar uma conta</Link>
+          {/* <Link to="/SwiperPage">Ir para Swipper</Link> */}
         </div>
       </form>
       <ToggleButton isDarkMode={isDarkMode} onToggle={toggleTheme} />

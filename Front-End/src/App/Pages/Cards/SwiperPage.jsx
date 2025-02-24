@@ -90,6 +90,9 @@ export function SwiperPage() {
         console.log("Resposta da API:", data);
         alert("Seleções salvas com sucesso!");
         setIsSubmitted(true);
+
+        navigate('/roadmap');
+        
       } else {
         console.error("Erro na requisição:", response.statusText);
         alert("Erro ao salvar seleções.");
