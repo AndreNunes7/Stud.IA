@@ -1,8 +1,13 @@
+body{
+  background: linear-gradient(135deg, #1a0f47 0%, #13141d 50%, #283361 100%);
+}
+
 .dashboard-container {
     padding: 20px;
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+   
   }
   
   .dashboard-title {
