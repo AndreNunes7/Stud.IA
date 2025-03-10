@@ -9,6 +9,7 @@ import Dashboard from "./App/Pages/Dashboard/dashboard.jsx";
 import {Introducao} from "./App/Pages/Introdução/introducao.jsx"
 import {Sobre} from "./App/Pages/Sobre/sobre.jsx"
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

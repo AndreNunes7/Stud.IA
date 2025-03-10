@@ -1,71 +1,91 @@
-import React, { useState, useEffect } from "react";
-import "../styles/dashboard.css";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../styles/torta.css"
 
-const Dashboard = ({ etapas = [] }) => {
-  const getNumeroDeDiasNoMes = () => {
-    const dataAtual = new Date();
-    const ano = dataAtual.getFullYear();
-    const mes = dataAtual.getMonth(); 
-    
-    
-    const ultimoDiaDoMes = new Date(ano, mes + 1, 0);
-    return ultimoDiaDoMes.getDate(); 
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const DashboardTorta = () => {
+  const location = useLocation(); 
+  const navigate = useNavigate();
+  
+  
+  const { trilhaEscolhida, senioridadeEscolhida, dificuldadeEscolhida, diasEscolhidos } = location.state || {};
+
+ 
+  const data = {
+    labels: ["Trilha", "Senioridade", "Dificuldade", "Dias de Estudo"],
+    datasets: [
+      {
+        label: "Distribuição das Escolhas",
+        data: [
+          trilhaEscolhida ? 1 : 0,
+          senioridadeEscolhida ? 1 : 0,
+          dificuldadeEscolhida ? 1 : 0,
+          diasEscolhidos && diasEscolhidos.length > 0 ? 1 : 0,
+        ],
+        backgroundColor: [
+          "#ff6384",
+          "#36a2eb",
+          "#ffce56",
+          "#4bc0c0",
+        ],
+        hoverBackgroundColor: [
+          "#ff4384",
+          "#36a0eb",
+          "#ffb156",
+          "#49c6c6",
+        ],
+      },
+    ],
   };
 
-  const numeroDeDiasNoMes = getNumeroDeDiasNoMes(); 
-
-  const [concluidos, setConcluidos] = useState(new Array(etapas.length).fill(false));
-  const [diasEstudo, setDiasEstudo] = useState(Array(numeroDeDiasNoMes).fill(false)); 
-
-  const marcarConcluido = (index) => {
-    const novoEstado = [...concluidos];
-    novoEstado[index] = !novoEstado[index];
-    setConcluidos(novoEstado);
+ 
+  const handleGoHome = () => {
+    navigate("/home");  
   };
-
-  const marcarDiaEstudo = (index) => {
-    const novoDias = [...diasEstudo];
-    novoDias[index] = !novoDias[index];
-    setDiasEstudo(novoDias);
-  };
-
-  const progresso = etapas.length > 0 
-    ? (concluidos.filter(Boolean).length / etapas.length) * 100 
-    : 0;
 
   return (
-    <div className="progresso-container">
-      <h2>Meu Progresso</h2>
-      <div className="progresso-bar">
-        <div className="progresso" style={{ width: `${progresso}%` }}></div>
-      </div>
-      <p>{progresso.toFixed(0)}% concluído</p>
+    <div className="dashboard-container">
+      <h2 className="dashboard-title">Seu Roadmap de Aprendizado 🚀</h2>
 
-      <div className="modulos-grid">
-        {etapas.map((etapa, index) => (
-          <div
-            key={index}
-            className={`modulo ${concluidos[index] ? "concluido" : "pendente"}`}
-            onClick={() => marcarConcluido(index)}
-          >
-            {etapa}
-          </div>
-        ))}
+      {/* Gráfico de Torta */}
+      <div className="chart-container">
+        <Pie data={data} />
       </div>
 
-      <h3>Dias Estudados</h3>
-      <div className="calendario">
-        {diasEstudo.map((dia, index) => (
-          <div
-            key={index}
-            className={`dia ${dia ? "estudado" : ""}`}
-            onClick={() => marcarDiaEstudo(index)}
-          ></div>
-        ))}
+      <div className="dashboard-info">
+        <div className="dashboard-item">
+          <strong>Trilha escolhida: </strong>
+          <p>{trilhaEscolhida || "Não selecionada"}</p>
+        </div>
+
+        <div className="dashboard-item">
+          <strong>Senioridade escolhida: </strong>
+          <p>{senioridadeEscolhida || "Não selecionada"}</p>
+        </div>
+
+        <div className="dashboard-item">
+          <strong>Dificuldade escolhida: </strong>
+          <p>{dificuldadeEscolhida || "Não selecionada"}</p>
+        </div>
+
+        <div className="dashboard-item">
+          <strong>Dias de estudo: </strong>
+          <p>{diasEscolhidos && diasEscolhidos.length > 0 ? diasEscolhidos.join(', ') : "Não selecionados"}</p>
+        </div>
+      </div>
+
+     
+      <div className="action-container">
+        <button className="button-dashboard" onClick={handleGoHome}>
+          Ir para Home
+        </button>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardTorta;
