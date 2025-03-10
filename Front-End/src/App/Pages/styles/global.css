@@ -13,8 +13,8 @@ html, body {
 }
 
 .container {
-    width: 100vw; /* Largura total da tela */
-    height: 100vh; /* Altura total da tela */
+    width: 100vw; 
+    height: 100vh; 
     display: flex;
     align-items: center; 
     justify-content: center; 
@@ -237,7 +237,7 @@ html, body {
   }
   
   /* btn - Quando o tema é escuro */
-  .toggle-button.dark {
+  /* .toggle-button.dark {
     transform: translateX(30px);
     background-color: #333;
   }
@@ -245,11 +245,11 @@ html, body {
   .toggle-button.light {
     transform: translateX(0);
     background-color: #fff;
-  }
+  } */
   
   
   /*modo escuro da pagina de castros*/
-  body.dark-theme {
+  /* body.dark-theme {
     background-color: #333;
     color: #fff;
   }
@@ -266,4 +266,4 @@ html, body {
   
   body.light-theme .container {
     background: linear-gradient(145deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%);
-  }
+  } */

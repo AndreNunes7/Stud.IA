@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import "../styles/global.css";
 import arrow from "../../assets/arrow.svg"; 
@@ -123,6 +122,7 @@ export function Cadastro() {
         <div className="footer">
           <p>Já tem uma conta?</p>
           <Link to="/login">Fazer login</Link>
+          <Link to="/dashboard">DAS</Link>
         </div>
       </form>
       {/* <ToggleButton isDarkMode={isDarkMode} onToggle={toggleTheme} /> */}

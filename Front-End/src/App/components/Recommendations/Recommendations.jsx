@@ -1,4 +1,3 @@
-// src/components/Recommendations.js
 import React from 'react';
 
 const Recommendations = () => {

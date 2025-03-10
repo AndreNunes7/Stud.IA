@@ -1,11 +1,9 @@
-/* App/Pages/introducao.css */
-
 .intro-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #1a0f47 0%, #13141d 50%, #283361 100%); /* Seu gradiente */
+    background: linear-gradient(135deg, #1a0f47 0%, #13141d 50%, #283361 100%); 
     color: white;
     font-family: 'Arial', sans-serif;
     padding: 20px;
@@ -14,7 +12,7 @@
   .intro-content {
     flex: 1;
     max-width: 600px;
-    text-align: left; /* Alinhando o texto à esquerda */
+    text-align: left; 
     animation: fadeIn 1.5s ease-in-out;
   }
   

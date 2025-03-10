@@ -1,6 +1,7 @@
+/* Navbar - Estilos principais */
 .navbar {
-    background: transparent; /* Torna a navbar transparente */
-    backdrop-filter: blur(10px); /* Aplica um leve desfoque para melhor visibilidade */
+    background: transparent;
+    backdrop-filter: blur(10px);
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
@@ -19,12 +20,12 @@
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    /* padding: 1 3rem; Ajuste para não empurrar a logo */
 }
 
 .navbar-logo {
     padding-top: 13px;
 }
+
 .navbar-logo img {
     height: 38px;
     width: 68px;
@@ -35,9 +36,14 @@
     display: flex;
     list-style: none;
     gap: 0.6rem;
-    margin-left: 129%; /* Alinha os itens do menu à direita */
+    margin-left: auto; /* Ajustar para centralizar corretamente */
 }
 
+.navbar-menu li {
+    list-style: none; /* Para evitar marcas de lista */
+}
+
+/* Links */
 .navbar-link {
     color: white;
     text-decoration: none;
@@ -50,6 +56,7 @@
     color: #d1e8ff;
 }
 
+/* Botões */
 .navbar-button {
     background: white;
     color: #1e3a8a;
@@ -65,32 +72,26 @@
     background: #d1e8ff;
 }
 
-
 .container {
-    padding-top: 70px;
-}
-.navbar.home {
-    background: transparent; 
+    padding-top: 70px; /* Espaço para o navbar fixo */
 }
 
+.navbar.home {
+    background: transparent;
+}
 
 .navbar.home .navbar-logo img {
     height: 50px;
     width: auto;
 }
 
-
 .navbar.home .navbar-menu {
     margin-right: 2rem;
 }
 
-
+/* Responsividade: Menu hamburguer */
 @media (max-width: 768px) {
-    .navbar.home {
-        height: 50px;
-        padding: 0.3rem 1rem;
-    }
-
+    /* Ajustes para o navbar em telas pequenas */
     .navbar.home .navbar-menu {
         display: none;
         flex-direction: column;
@@ -103,11 +104,35 @@
         padding: 1rem 0;
     }
 
+    /* Menu visível quando 'active' */
     .navbar.home .navbar-menu.active {
         display: flex;
     }
 
     .navbar.home .navbar-menu li {
         padding: 0.8rem 0;
+    }
+
+    /* Exibe o ícone de hamburguer apenas em telas pequenas */
+    .navbar-home-hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .navbar-home-hamburger img {
+        width: 30px;
+        height: auto;
+    }
+
+    /* Ajustar a altura do logo para telas pequenas */
+    .navbar-logo img {
+        height: 40px;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Esconde o ícone de hamburguer em telas maiores que 768px */
+    .navbar-home-hamburger {
+        display: none;
     }
 }
