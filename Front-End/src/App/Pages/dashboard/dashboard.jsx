@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
 import "../styles/dashboard.css";
 
 const Dashboard = ({ etapas = [] }) => {
@@ -9,10 +9,10 @@ const Dashboard = ({ etapas = [] }) => {
     const mes = dataAtual.getMonth();
 
     const ultimoDiaDoMes = new Date(ano, mes + 1, 0);
-    return ultimoDiaDoMes.getDate();
+    return ultimoDiaDoMes.getDate(); // Número de dias no mês
   };
 
-  const numeroDeDiasNoMes = getNumeroDeDiasNoMes();
+  const numeroDeDiasNoMes = getNumeroDeDiasNoMes(); // Número de dias do mês
 
   const [concluidos, setConcluidos] = useState(new Array(etapas.length).fill(false));
   const [diasEstudo, setDiasEstudo] = useState(Array(numeroDeDiasNoMes).fill(false));
@@ -29,44 +29,59 @@ const Dashboard = ({ etapas = [] }) => {
     setDiasEstudo(novoDias);
   };
 
-  const progresso = etapas.length > 0 
+  const progressoEtapas = etapas.length > 0 
     ? (concluidos.filter(Boolean).length / etapas.length) * 100 
     : 0;
 
-  // Dados- gráfico de progresso
+  const progressoDias = numeroDeDiasNoMes > 0 
+    ? (diasEstudo.filter(Boolean).length / numeroDeDiasNoMes) * 100 
+    : 0;
+
+  const progressoGeral = (progressoEtapas + progressoDias) / 2;
+
+  // Dados para o gráfico de pizza
   const data = [
-    { name: "Concluído", value: concluidos.filter(Boolean).length },
-    { name: "Pendente", value: etapas.length - concluidos.filter(Boolean).length },
+    { name: 'Etapas Concluídas', value: progressoEtapas },
+    { name: 'Dias Estudados', value: progressoDias },
+    { name: 'Restante', value: 100 - progressoGeral }
   ];
+
+  // Cores para o gráfico de pizza
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
   return (
     <div className="progresso-container">
       <h2>Meu Progresso</h2>
+
+      {/* Barra de Progresso Geral */}
       <div className="progresso-bar">
-        <div className="progresso" style={{ width: `${progresso}%` }}></div>
+        <div className="progresso" style={{ width: `${progressoGeral}%` }}></div>
       </div>
-      <p>{progresso.toFixed(0)}% concluído</p>
+      <p>{progressoGeral.toFixed(0)}% concluído</p>
 
-      {/* progresso de etapas */}
-      <h3>Progresso das Etapas</h3>
-      <PieChart width={200} height={200}>
-        <Pie
-          data={data}
-          dataKey="value"
-          cx="50%"
-          cy="50%"
-          outerRadius={80}
-          fill="#8884d8"
-          label
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={index === 0 ? "#4CAF50" : "#FFC107"} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
+      {/* Exibindo o Gráfico de Pizza */}
+      <ResponsiveContainer width="100%" height={300}>
+        <PieChart>
+          <Pie 
+            data={data} 
+            dataKey="value" 
+            nameKey="name" 
+            cx="50%" 
+            cy="50%" 
+            outerRadius={100} 
+            fill="#8884d8"
+            label
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
 
+      {/* Exibindo as Etapas */}
       <div className="modulos-grid">
         {etapas.map((etapa, index) => (
           <div
@@ -79,7 +94,7 @@ const Dashboard = ({ etapas = [] }) => {
         ))}
       </div>
 
-     
+      {/* Exibindo os Dias Estudados */}
       <h3>Dias Estudados</h3>
       <div className="calendario">
         {diasEstudo.map((dia, index) => (
